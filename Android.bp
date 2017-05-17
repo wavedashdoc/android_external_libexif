@@ -46,7 +46,7 @@ cc_library_shared {
         "libexif/pentax/mnote-pentax-tag.c",
     ],
 
-    export_include_dirs: ["libexif"],
+    export_include_dirs: ["."],
 
     cflags: [
         "-ftrapv",
