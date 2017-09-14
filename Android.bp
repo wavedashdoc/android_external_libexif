@@ -18,6 +18,10 @@
 // a static library or otherwise statically link libexif with your code.
 cc_library_shared {
     name: "libexif",
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
 
     srcs: [
         "libexif/exif-byte-order.c",
