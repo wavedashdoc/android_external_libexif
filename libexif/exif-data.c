@@ -39,6 +39,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 #undef JPEG_MARKER_SOI
 #define JPEG_MARKER_SOI  0xd8
@@ -385,9 +386,9 @@ exif_data_load_data_content (ExifData *data, ExifIfd ifd,
 	}
 
 	/* Read the number of entries */
-	if ((offset + 2 < offset) || (offset + 2 < 2) || (offset + 2 > ds)) {
+	if ((offset > UINT_MAX - 2) || (offset + 2 > ds)) {
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "ExifData",
-			  "Tag data past end of buffer (%u > %u)", offset+2, ds);
+			  "Tag data past end of buffer (%u + 2 > %u)", offset, ds);
 		return;
 	}
 	n = exif_get_short (d + offset, data->priv->order);
