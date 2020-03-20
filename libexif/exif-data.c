@@ -315,7 +315,10 @@ exif_data_load_data_thumbnail (ExifData *data, const unsigned char *d,
 			       unsigned int ds, ExifLong o, ExifLong s)
 {
 	/* Sanity checks */
-	if ((o + s < o) || (o + s < s) || (o + s > ds) || (o > ds)) {
+	uint64_t o64 = (uint64_t) o;
+	uint64_t s64 = (uint64_t) s;
+	uint64_t ds64 = (uint64_t) ds;
+	if ((o64 + s64) > ds64) {
 		exif_log (data->priv->log, EXIF_LOG_CODE_DEBUG, "ExifData",
 			  "Bogus thumbnail offset (%u) or size (%u).",
 			  o, s);
